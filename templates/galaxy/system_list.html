@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Systems</title>
+</head>
+<body>
+    <h1>Star Systems</h1>
+
+    <ul>
+        {% for system in systems %}
+            <li>
+                <a href="{% url 'system_detail' system.pk %}">{{ system.name }}</a>
+            </li>
+        {% empty %}
+            <li>No systems yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ system.name }}</title>
+</head>
+<body>
+
+<h1>{{ system.name }}</h1>
+
+{% if system.notes %}
+    <p>{{ system.notes }}</p>
+{% endif %}
+
+<h2>Celestial Bodies</h2>
+
+<ul>
+    {% for body in bodies %}
+        <li>
+            <a href="{% url 'body_detail' body.pk %}">
+                {{ body.name }}
+            </a>
+        </li>
+    {% empty %}
+        <li>No bodies in this system yet.</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

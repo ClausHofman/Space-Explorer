@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ body.name }}</title>
+</head>
+<body>
+
+<h1>{{ body.name }}</h1>
+
+{% if body.notes %}
+    <p>{{ body.notes }}</p>
+{% endif %}
+
+<h2>Moons</h2>
+<ul>
+    {% for moon in moons %}
+        <li>
+            <a href="{% url 'body_detail' moon.pk %}">
+                {{ moon.name }}
+            </a>
+        </li>
+    {% empty %}
+        <li>No moons.</li>
+    {% endfor %}
+</ul>
+
+<h2>Mining Spots</h2>
+<ul>
+    {% for spot in mining_spots %}
+        <li>
+            <a href="{% url 'mining_spot_detail' spot.pk %}">
+                {{ spot.name }}
+            </a>
+        </li>
+    {% empty %}
+        <li>No mining spots.</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ spot.name }}</title>
+</head>
+<body>
+
+<h1>{{ spot.name }}</h1>
+
+<p><strong>Body:</strong> 
+    <a href="{% url 'body_detail' spot.body.pk %}">
+        {{ spot.body.name }}
+    </a>
+</p>
+
+{% if spot.notes %}
+    <p>{{ spot.notes }}</p>
+{% endif %}
+
+<h2>Materials Found Here</h2>
+<ul>
+    {% for material in materials %}
+        <li>{{ material.name }}</li>
+    {% empty %}
+        <li>No materials listed.</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
