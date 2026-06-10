@@ -3,6 +3,10 @@
 {% block title %}{{ system.name }}{% endblock %}
 
 {% block content %}
+<p>
+    <a href="{% url 'system_list' %}">Systems</a> >
+    {{ system.name }}
+</p>
 
 <h1>{{ system.name }}</h1>
 
