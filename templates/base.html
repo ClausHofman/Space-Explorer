@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Space Notes{% endblock %}</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            max-width: 900px;
+        }
+        header {
+            margin-bottom: 30px;
+        }
+        header a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        h1, h2, h3 {
+            margin-top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a href="{% url 'system_list' %}">Systems</a>
+</header>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

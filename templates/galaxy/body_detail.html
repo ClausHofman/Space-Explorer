@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ body.name }}</title>
-</head>
-<body>
+{% extends "base.html" %}
 
+{% block title %}{{ body.name }}{% endblock %}
+
+{% block content %}
+<p>
+    <a href="{% url 'system_list' %}">Systems</a> >
+    <a href="{% url 'system_detail' body.system.pk %}">{{ body.system.name }}</a> >
+    {{ body.name }}
+</p>
 <h1>{{ body.name }}</h1>
 
 {% if body.notes %}
@@ -15,9 +18,7 @@
 <ul>
     {% for moon in moons %}
         <li>
-            <a href="{% url 'body_detail' moon.pk %}">
-                {{ moon.name }}
-            </a>
+            <a href="{% url 'body_detail' moon.pk %}">{{ moon.name }}</a>
         </li>
     {% empty %}
         <li>No moons.</li>
@@ -28,14 +29,10 @@
 <ul>
     {% for spot in mining_spots %}
         <li>
-            <a href="{% url 'mining_spot_detail' spot.pk %}">
-                {{ spot.name }}
-            </a>
+            <a href="{% url 'mining_spot_detail' spot.pk %}">{{ spot.name }}</a>
         </li>
     {% empty %}
         <li>No mining spots.</li>
     {% endfor %}
 </ul>
-
-</body>
-</html>
+{% endblock %}

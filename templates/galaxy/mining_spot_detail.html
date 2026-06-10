@@ -1,13 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ spot.name }}</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}{{ spot.name }}{% endblock %}
+
+{% block content %}
+<p>
+    <a href="{% url 'system_list' %}">Systems</a> >
+    <a href="{% url 'system_detail' spot.body.system.pk %}">{{ spot.body.system.name }}</a> >
+    <a href="{% url 'body_detail' spot.body.pk %}">{{ spot.body.name }}</a> >
+    {{ spot.name }}
+</p>
 
 <h1>{{ spot.name }}</h1>
 
-<p><strong>Body:</strong> 
+<p><strong>Body:</strong>
     <a href="{% url 'body_detail' spot.body.pk %}">
         {{ spot.body.name }}
     </a>
@@ -17,14 +22,12 @@
     <p>{{ spot.notes }}</p>
 {% endif %}
 
-<h2>Materials Found Here</h2>
+{% if spot.materials.all %}
+<h2>Materials</h2>
 <ul>
-    {% for material in materials %}
+    {% for material in spot.materials.all %}
         <li>{{ material.name }}</li>
-    {% empty %}
-        <li>No materials listed.</li>
     {% endfor %}
 </ul>
-
-</body>
-</html>
+{% endif %}
+{% endblock %}
