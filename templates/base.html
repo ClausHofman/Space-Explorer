@@ -22,6 +22,68 @@
         h1, h2, h3 {
             margin-top: 25px;
         }
+        button {
+            padding: 6px 12px;
+            background-color: #eee;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+
+        /* Arrow toggle */
+        .action-toggle {
+            display: inline-block;
+            cursor: pointer;
+            font-size: 20px;
+            user-select: none;
+            line-height: 1;
+        }
+
+        #action-panel {
+            overflow: hidden;
+            max-width: 0;
+            transition: max-width 0.3s ease;
+            display: inline-block;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        #action-panel.open {
+            max-width: 300px;
+        }
+
+        #toggle-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        #toggle-arrow.rotated {
+            transform: rotate(90deg);
+        }
+        .page-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-header h1 {
+            margin: 0;
+        }
+
+        /*Delete button */
+        button.delete {
+            background-color: #f8d7da;
+            border-color: #f5c2c7;
+        }
+
+        button.delete:hover {
+            background-color: #f1b0b7;
+        }
+
+
     </style>
 </head>
 
@@ -34,4 +96,16 @@
 {% endblock %}
 
 </body>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const arrow = document.getElementById("toggle-arrow");
+    const panel = document.getElementById("action-panel");
+
+    arrow.addEventListener("click", function() {
+        panel.classList.toggle("open");
+        arrow.classList.toggle("rotated");
+    });
+});
+</script>
+
 </html>

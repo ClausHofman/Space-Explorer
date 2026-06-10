@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.forms import ModelForm
 from .models import System, CelestialBody, MiningSpot
 
 def system_list(request):
@@ -36,3 +37,52 @@ def mining_spot_detail(request, pk):
         "spot": spot,
         "materials": materials,
     })
+
+# Add system
+class SystemForm(ModelForm):
+    class Meta:
+        model = System
+        fields = ["name", "notes"]
+
+def system_create(request):
+    if request.method == "POST":
+        form = SystemForm(request.POST)
+        if form.is_valid():
+            system = form.save()
+            return redirect("system_detail", pk=system.pk)
+    else:
+        form = SystemForm()
+    
+    return render(request, "galaxy/system_form.html", {
+        "form": form,
+        "mode": "create",
+    })
+
+
+# Edit system
+def system_edit(request, pk):
+    system = get_object_or_404(System, pk=pk)
+
+    if request.method == "POST":
+        form = SystemForm(request.POST, instance=system)
+        if form.is_valid():
+            form.save()
+            return redirect("system_detail", pk=system.pk)
+    else:
+        form = SystemForm(instance=system)
+
+    return render(request, "galaxy/system_form.html", {
+        "form": form,
+        "mode": "edit",
+    })
+
+
+# Delete system
+def system_delete(request, pk):
+    system = get_object_or_404(System, pk=pk)
+
+    if request.method == "POST":
+        system.delete()
+        return redirect("system_list")
+
+    return render(request, "galaxy/system_confirm_delete.html", {"system": system})

@@ -1,7 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Star Systems</h1>
+
+<div class="page-header">
+    <h1>Star Systems</h1>
+
+    <div class="action-toggle">
+        <span id="toggle-arrow">▶</span>
+    </div>
+
+    <div id="action-panel" class="hidden">
+        <a href="{% url 'system_create' %}">
+            <button>Add New System</button>
+        </a>
+    </div>
+</div>
 
 <ul>
     {% for system in systems %}

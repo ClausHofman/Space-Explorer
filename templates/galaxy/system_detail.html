@@ -3,6 +3,13 @@
 {% block title %}{{ system.name }}{% endblock %}
 
 {% block content %}
+<a href="{% url 'system_edit' system.pk %}">
+    <button>Edit System</button>
+</a>
+
+<a href="{% url 'system_delete' system.pk %}">
+    <button class="delete">Delete System</button>
+</a>
 <p>
     <a href="{% url 'system_list' %}">Systems</a> >
     {{ system.name }}
