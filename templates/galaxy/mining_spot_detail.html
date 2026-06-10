@@ -4,7 +4,6 @@
 
 {% block content %}
 <p>
-    <a href="{% url 'system_list' %}">Systems</a> >
     <a href="{% url 'system_detail' spot.body.system.pk %}">{{ spot.body.system.name }}</a> >
     <a href="{% url 'body_detail' spot.body.pk %}">{{ spot.body.name }}</a> >
     {{ spot.name }}

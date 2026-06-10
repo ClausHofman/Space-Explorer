@@ -4,7 +4,6 @@
 
 {% block content %}
 <p>
-    <a href="{% url 'system_list' %}">Systems</a> >
     <a href="{% url 'system_detail' body.system.pk %}">{{ body.system.name }}</a> >
     {{ body.name }}
 </p>
