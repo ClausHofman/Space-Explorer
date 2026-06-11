@@ -28,10 +28,68 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             cursor: pointer;
+            font: inherit;
+            line-height: 1.2;
         }
 
         button:hover {
             background-color: #ddd;
+        }
+
+        .button-link {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: #eee;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+            font: inherit;
+            line-height: 1.2;
+        }
+
+        .button-link:hover {
+            background-color: #ddd;
+        }
+
+        .form-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn-secondary {
+            background-color: #eee;
+            border-color: #ccc;
+            color: #222;
+        }
+
+        .btn-secondary:hover {
+            background-color: #ddd;
+        }
+
+        .btn-primary {
+            background-color: #1f6feb;
+            border-color: #1f6feb;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #1858ba;
+            border-color: #1858ba;
+        }
+
+        .btn-danger {
+            background-color: #d73a49;
+            border-color: #d73a49;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background-color: #b12b38;
+            border-color: #b12b38;
         }
 
         /* Arrow toggle */
@@ -43,24 +101,26 @@
             line-height: 1;
         }
 
-        #action-panel {
+        .action-panel {
             overflow: hidden;
             max-width: 0;
             transition: max-width 0.3s ease;
-            display: inline-block;
-            vertical-align: middle;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             white-space: nowrap;
         }
 
-        #action-panel.open {
-            max-width: 300px;
+        .action-panel.open {
+            max-width: 500px;
+            overflow: visible;
         }
 
-        #toggle-arrow {
+        .toggle-arrow {
             transition: transform 0.3s ease;
         }
 
-        #toggle-arrow.rotated {
+        .toggle-arrow.rotated {
             transform: rotate(90deg);
         }
         .page-header {
@@ -83,6 +143,46 @@
             background-color: #f1b0b7;
         }
 
+        /* Action panel and dropdown */
+
+        .add-menu {
+            display: inline-block;
+            position: relative;
+        }
+
+        .add-dropdown {
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0;
+            min-width: 200px;
+            border: 1px solid #bbb;
+            border-radius: 4px;
+            background: #fff;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+            padding: 6px;
+            display: none;
+            z-index: 20;
+        }
+
+        .add-dropdown.open {
+            display: block;
+        }
+
+        .add-dropdown a {
+            display: block;
+            padding: 6px 8px;
+            color: #222;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .add-dropdown a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .hidden {
+            display: none;
+        }
 
     </style>
 </head>
@@ -98,12 +198,52 @@
 </body>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const arrow = document.getElementById("toggle-arrow");
-    const panel = document.getElementById("action-panel");
+    document.querySelectorAll(".action-toggle").forEach(function(toggle) {
+        const arrow = toggle.querySelector(".toggle-arrow");
+        const panel = toggle.parentElement.querySelector(".action-panel");
 
-    arrow.addEventListener("click", function() {
-        panel.classList.toggle("open");
-        arrow.classList.toggle("rotated");
+        if (!arrow || !panel) {
+            return;
+        }
+
+        toggle.addEventListener("click", function() {
+            panel.classList.toggle("open");
+            arrow.classList.toggle("rotated");
+        });
+    });
+
+    const allDropdowns = Array.from(document.querySelectorAll(".add-dropdown"));
+
+    function closeDropdowns(exceptDropdown) {
+        allDropdowns.forEach(function(dropdown) {
+            if (dropdown !== exceptDropdown) {
+                dropdown.classList.remove("open");
+            }
+        });
+    }
+
+    document.querySelectorAll(".add-menu").forEach(function(menu) {
+        const addButton = menu.querySelector(".add-button");
+        const addDropdown = menu.querySelector(".add-dropdown");
+
+        if (!addButton || !addDropdown) {
+            return;
+        }
+
+        addButton.addEventListener("click", function(event) {
+            event.stopPropagation();
+            const willOpen = !addDropdown.classList.contains("open");
+            closeDropdowns(addDropdown);
+            addDropdown.classList.toggle("open", willOpen);
+        });
+
+        addDropdown.addEventListener("click", function(event) {
+            event.stopPropagation();
+        });
+    });
+
+    document.addEventListener("click", function() {
+        closeDropdowns(null);
     });
 });
 </script>

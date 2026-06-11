@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %}Add System{% endblock %}
+{% block title %}
+    {% if mode == "edit" %}Edit Mining Spot{% else %}Add Mining Spot{% endif %}
+{% endblock %}
 
 {% block content %}
 <h1>
     {% if mode == "edit" %}
-        Edit System
+        Edit Mining Spot
     {% else %}
-        Add New System
+        Add Mining Spot
     {% endif %}
 </h1>
 
@@ -15,19 +17,9 @@
     {% csrf_token %}
     <input type="hidden" name="next" value="{{ cancel_url }}">
     {{ form.as_p }}
-
     <div class="form-actions">
         <a href="{{ cancel_url }}" class="button-link btn-secondary">Cancel</a>
-
-        <button type="submit" class="btn-primary">
-            {% if mode == "edit" %}
-                Save Changes
-            {% else %}
-                Create System
-            {% endif %}
-        </button>
+        <button type="submit" class="btn-primary">Save</button>
     </div>
-
 </form>
-
 {% endblock %}

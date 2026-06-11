@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}Delete System{% endblock %}
+{% block title %}Delete Body{% endblock %}
 
 {% block content %}
-<h1>Delete System</h1>
+<h1>Delete Body</h1>
 
-<p>Are you sure you want to delete "{{ system.name }}"?</p>
+<p>Are you sure you want to delete "{{ body.name }}"?</p>
 
 <form method="post">
     {% csrf_token %}
@@ -15,5 +15,4 @@
         <button type="submit" class="btn-danger">Yes, delete</button>
     </div>
 </form>
-
 {% endblock %}

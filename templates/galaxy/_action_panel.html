@@ -1,0 +1,23 @@
+<div class="action-toggle">
+    <span class="toggle-arrow">▶</span>
+</div>
+
+<div class="action-panel">
+
+    {% for action in actions %}
+        <a href="{{ action.url }}">
+            <button class="{{ action.class }}">{{ action.label }}</button>
+        </a>
+    {% endfor %}
+
+    <div class="add-menu">
+        <button type="button" class="add-button">Add...</button>
+
+        <div class="add-dropdown">
+            {% for item in add_items %}
+                <a href="{{ item.url }}">{{ item.label }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>

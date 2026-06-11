@@ -1,19 +1,25 @@
 {% extends "base.html" %}
 
-{% block title %}Delete System{% endblock %}
+{% block title %}
+    {% if mode == "edit" %}Edit Body{% else %}Add Body{% endif %}
+{% endblock %}
 
 {% block content %}
-<h1>Delete System</h1>
-
-<p>Are you sure you want to delete "{{ system.name }}"?</p>
+<h1>
+    {% if mode == "edit" %}
+        Edit Body
+    {% else %}
+        Add New Body
+    {% endif %}
+</h1>
 
 <form method="post">
     {% csrf_token %}
     <input type="hidden" name="next" value="{{ cancel_url }}">
+    {{ form.as_p }}
     <div class="form-actions">
         <a href="{{ cancel_url }}" class="button-link btn-secondary">Cancel</a>
-        <button type="submit" class="btn-danger">Yes, delete</button>
+        <button type="submit" class="btn-primary">Save</button>
     </div>
 </form>
-
 {% endblock %}

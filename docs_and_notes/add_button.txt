@@ -1,0 +1,63 @@
+Step-by-step guide when adding a new action
+
+1. Decide where the new action belongs
+- If it is a direct action (like Edit/Delete), add it to actions.
+- If it is a creation flow (like Add Moon/Add Spot), add it to add_items.
+
+2. Create or confirm the URL route first
+- Add/verify the route in urls.py.
+- Make sure the route has a stable name you can reverse.
+
+3. Implement the view and template target
+- Add the view logic in views.py.
+- Ensure GET renders a form and POST handles validation/redirect safely.
+
+4. Wire it into the page context
+- In the relevant detail/list view inside views.py, add a new dictionary entry:
+- actions entry shape:
+  - label
+  - url
+  - class (optional, e.g. delete)
+- add_items entry shape:
+  - label
+  - url
+- Keep labels short and unique so menus stay readable.
+
+5. Do not change structural hooks in the panel partial
+- Keep class names in _action_panel.html unchanged:
+  - action-toggle
+  - toggle-arrow
+  - action-panel
+  - add-menu
+  - add-button
+  - add-dropdown
+- If you rename these, JS in base.html stops binding.
+
+6. Preserve dropdown CSS/behavior constraints
+- Keep action-panel closed with horizontal slide behavior and open with visible overflow in base.html.
+- Keep add-dropdown absolutely positioned under add-menu.
+- Avoid wrapping the panel in containers with overflow hidden unless intentional.
+
+7. Keep IDs out of reusable partials
+- Use classes, not IDs, in reusable includes like _action_panel.html.
+- IDs in repeated components are the fastest way to break JS bindings.
+
+8. Validate after each addition
+- Run:
+  - manage.py check
+- Click-test the page:
+  - open arrow
+  - open Add menu
+  - click outside to close
+  - click each new menu item and verify target page/redirect.
+
+9. Add regression tests (highly recommended)
+- At minimum in tests.py:
+  - page renders expected add_items labels
+  - each reversed URL resolves
+  - POST path for new create flow redirects correctly
+
+10. Follow a small change pattern
+- Add one new action item at a time.
+- Validate immediately.
+- Then add the next. This makes breakages obvious and easy to locate.

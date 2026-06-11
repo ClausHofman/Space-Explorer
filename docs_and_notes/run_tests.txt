@@ -1,0 +1,11 @@
+- Run all tests:
+.venv\Scripts\python.exe manage.py test
+
+- Run only galaxy app tests:
+.venv\Scripts\python.exe manage.py test galaxy
+
+- Run one specific test class:
+.venv\Scripts\python.exe manage.py test galaxy.tests.ActionPanelRenderTests
+
+- Run one specific test method:
+.venv\Scripts\python.exe manage.py test galaxy.tests.ActionPanelRenderTests.test_reversed_urls_resolve_to_expected_view_names

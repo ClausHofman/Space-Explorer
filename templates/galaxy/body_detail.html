@@ -3,36 +3,48 @@
 {% block title %}{{ body.name }}{% endblock %}
 
 {% block content %}
+
 <p>
     <a href="{% url 'system_list' %}">Systems</a> >
     <a href="{% url 'system_detail' body.system.pk %}">{{ body.system.name }}</a> >
+
+    {% if body.parent_body %}
+        <a href="{% url 'body_detail' body.parent_body.pk %}">{{ body.parent_body.name }}</a> >
+    {% endif %}
+
     {{ body.name }}
 </p>
-<h1>{{ body.name }}</h1>
+
+<div class="page-header">
+    <h1>{{ body.name }}</h1>
+
+    {% include "galaxy/_action_panel.html" with actions=actions add_items=add_items %}
+</div>
 
 {% if body.notes %}
     <p>{{ body.notes }}</p>
 {% endif %}
 
-<h2>Moons</h2>
-<ul>
-    {% for moon in moons %}
-        <li>
-            <a href="{% url 'body_detail' moon.pk %}">{{ moon.name }}</a>
-        </li>
-    {% empty %}
-        <li>No moons.</li>
-    {% endfor %}
-</ul>
+{% if moons %}
+    <h2>Moons</h2>
+    <ul>
+        {% for moon in moons %}
+            <li>
+                <a href="{% url 'body_detail' moon.pk %}">{{ moon.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
 
-<h2>Mining Spots</h2>
-<ul>
-    {% for spot in mining_spots %}
-        <li>
-            <a href="{% url 'mining_spot_detail' spot.pk %}">{{ spot.name }}</a>
-        </li>
-    {% empty %}
-        <li>No mining spots.</li>
-    {% endfor %}
-</ul>
+{% if spots %}
+    <h2>Mining Spots</h2>
+    <ul>
+        {% for spot in spots %}
+            <li>
+                <a href="{% url 'mining_spot_detail' spot.pk %}">{{ spot.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
 {% endblock %}

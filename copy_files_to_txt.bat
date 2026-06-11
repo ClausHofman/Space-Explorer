@@ -88,6 +88,15 @@ set "FILE13COPY=spacenotes_project_urls.txt"
 set "FILE14=spacenotes\settings.py"
 set "FILE14COPY=settings.txt"
 
+set "FILE15=galaxy\forms.py"
+set "FILE15COPY=forms.txt"
+
+set "FILE16=templates\galaxy\_action_panel.html"
+set "FILE16COPY=html_action_panel.txt"
+
+set "FILE17=docs_and_notes\css_form_guide.md"
+set "FILE17COPY=css_form_guide.txt"
+
 rem ================================================================
 rem 3) LOOP SETTINGS AND VALIDATION RULES
 rem ================================================================

@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %}Add System{% endblock %}
+{% block title %}
+    {% if mode == "edit" %}Edit Item{% else %}Add Item{% endif %}
+{% endblock %}
 
 {% block content %}
 <h1>
     {% if mode == "edit" %}
-        Edit System
+        Edit Item
     {% else %}
-        Add New System
+        Add New Item
     {% endif %}
 </h1>
 
@@ -18,16 +20,13 @@
 
     <div class="form-actions">
         <a href="{{ cancel_url }}" class="button-link btn-secondary">Cancel</a>
-
         <button type="submit" class="btn-primary">
             {% if mode == "edit" %}
                 Save Changes
             {% else %}
-                Create System
+                Create Item
             {% endif %}
         </button>
     </div>
-
 </form>
-
 {% endblock %}
