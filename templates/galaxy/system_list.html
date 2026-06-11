@@ -22,7 +22,7 @@
             <a href="{% url 'system_detail' system.pk %}">{{ system.name }}</a>
         </li>
     {% empty %}
-        <li>No systems found.</li>
+        <li>No systems found. Click the arrow above to add one.</li>
     {% endfor %}
 </ul>
 {% endblock %}
