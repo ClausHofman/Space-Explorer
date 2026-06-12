@@ -13,10 +13,50 @@
     {% endif %}
 </h1>
 
+<form id="sortForm" method="get">
+    <label for="sort">Sort materials by:</label>
+    <select name="sort" form="sortForm" onchange="document.getElementById('sortForm').submit()">
+        <option value="importance" {% if sort == 'importance' %}selected{% endif %}>Importance</option>
+        <option value="value" {% if sort == 'value' %}selected{% endif %}>Value</option>
+        <option value="name" {% if sort == 'name' %}selected{% endif %}>Alphabetical</option>
+    </select>
+</form>
+
+
 <form method="post">
     {% csrf_token %}
     <input type="hidden" name="next" value="{{ cancel_url }}">
-    {{ form.as_p }}
+<p>{{ form.name.label_tag }} {{ form.name }}</p>
+
+{% if form.fields.body %}
+    <p>{{ form.body.label_tag }} {{ form.body }}</p>
+{% endif %}
+
+<h3>Metals</h3>
+<div class="material-list">
+    {% for m in form.metals %}
+        <label class="material-item">
+            <input type="checkbox" name="materials" value="{{ m.id }}"
+                   {% if m.id in form.initial.materials %}checked{% endif %}>
+            {{ m.name }}
+        </label>
+    {% endfor %}
+</div>
+
+<h3>Minerals</h3>
+<div class="material-list">
+    {% for m in form.minerals %}
+        <label class="material-item">
+            <input type="checkbox" name="materials" value="{{ m.id }}"
+                   {% if m.id in form.initial.materials %}checked{% endif %}>
+            {{ m.name }}
+        </label>
+    {% endfor %}
+</div>
+
+
+<p>{{ form.notes.label_tag }} {{ form.notes }}</p>
+
     <div class="form-actions">
         <a href="{{ cancel_url }}" class="button-link btn-secondary">Cancel</a>
         <button type="submit" class="btn-primary">Save</button>

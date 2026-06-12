@@ -33,9 +33,9 @@ class CelestialBodyAdmin(admin.ModelAdmin):
 
 @admin.register(Material)
 class MaterialAdmin(admin.ModelAdmin):
-    list_display = ("name",)
-    search_fields = ("name",)
-    ordering = ("name",)
+    list_display = ["name", "category", "importance", "value", "is_enabled"]
+    list_editable = ["importance", "value", "is_enabled"]
+    list_filter = ["category", "is_enabled"]
 
 
 @admin.register(MiningSpot)

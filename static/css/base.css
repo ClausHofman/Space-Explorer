@@ -176,3 +176,19 @@ button.delete:hover {
 .hidden {
     display: none;
 }
+
+/* Render materials side-by-side */
+.material-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.material-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}

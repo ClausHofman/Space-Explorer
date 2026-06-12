@@ -249,21 +249,29 @@ def body_create_child(request, parent_pk):
 
 def mining_spot_create_for_body(request, body_pk):
     body = get_object_or_404(CelestialBody, pk=body_pk)
-    fallback_url = reverse("body_detail", args=[body.pk])
-    cancel_url = resolve_cancel_url(request, fallback_url)
+    cancel_url = reverse("body_detail", args=[body.pk])
+
+    sort = request.GET.get("sort") or request.session.get("material_sort", "importance")
+
+    # Save sorting to session
+    request.session["material_sort"] = sort
 
     if request.method == "POST":
-        form = MiningSpotForm(request.POST)
+        form = MiningSpotForm(
+            request.POST,
+            hide_relationship_fields=True,
+            sort=sort)
         if form.is_valid():
             spot = form.save(commit=False)
             spot.body = body
             spot.save()
             return redirect("mining_spot_detail", pk=spot.pk)
     else:
-        form = MiningSpotForm(initial={"body": body})
+        form = MiningSpotForm(initial={"body": body}, hide_relationship_fields=True, sort=sort)
 
     return render(request, "galaxy/mining_spot_form.html", {
         "form": form,
         "mode": "add",
         "cancel_url": cancel_url,
+        "sort": sort,
     })

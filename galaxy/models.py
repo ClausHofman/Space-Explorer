@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class System(models.Model):
@@ -26,11 +27,26 @@ class CelestialBody(models.Model):
 
 
 class Material(models.Model):
+    CATEGORY_CHOICES = [
+        ("metal", "Metal"),
+        ("mineral", "Mineral"),
+        ("gas", "Gas"),
+    ]
+
     name = models.CharField(max_length=100)
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default="metal")
+    is_enabled = models.BooleanField(default=True)
+    value = models.IntegerField(default=0)
+    importance = models.IntegerField(
+        default=1,
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(1000),
+        ],
+    )
 
     def __str__(self):
         return self.name
-
 
 class MiningSpot(models.Model):
     body = models.ForeignKey(CelestialBody, on_delete=models.CASCADE)
