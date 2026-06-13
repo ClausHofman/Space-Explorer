@@ -47,4 +47,22 @@
     </ul>
 {% endif %}
 
+{% if body.comments.all %}
+    <h2>Comments</h2>
+    <ul class="comment-list">
+        {% for comment in body.comments.all %}
+            <li class="comment-box">
+                <p>{{ comment.text }}</p>
+                <small>{{ comment.created_at }}</small>
+
+                <div class="comment-actions">
+                    <a href="{% url 'body_comment_edit' comment.pk %}"><button>Edit</button></a>
+                    <a href="{% url 'body_comment_delete' comment.pk %}"><button class="delete">Delete</button></a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endif %}
+
 {% endblock %}

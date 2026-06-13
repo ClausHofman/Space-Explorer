@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Add Comment
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    {% if mode == "edit" %}
+        Edit Comment
+    {% else %}
+        Add Comment
+    {% endif %}
+</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <div class="form-actions">
+        <a href="{{ target.get_absolute_url }}" class="button-link btn-secondary">Cancel</a>
+        <button type="submit" class="btn-primary">Save</button>
+    </div>
+</form>
+
+{% endblock %}

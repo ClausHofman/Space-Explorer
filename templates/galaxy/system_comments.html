@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Comments in {{ system.name }}{% endblock %}
+
+{% block content %}
+<p>
+    <a href="{% url 'system_detail' system.pk %}">{{ system.name }}</a> >
+    Comments
+</p>
+
+<h1>Comments in {{ system.name }}</h1>
+
+<ul class="comment-list">
+    {% for comment in comments %}
+        <li class="comment-box">
+            <p>{{ comment.text|linebreaksbr }}</p>
+            <small>{{ comment.created_at }}</small>
+
+            <div class="comment-target">
+                {% if comment.body %}
+                    On body:
+                    <a href="{{ comment.body.get_absolute_url }}">{{ comment.body.name }}</a>
+                {% else %}
+                    On mining spot:
+                    <a href="{{ comment.spot.get_absolute_url }}">{{ comment.spot.name }}</a>
+                {% endif %}
+            </div>
+        </li>
+    {% empty %}
+        <li>No comments found.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Bodies in {{ system.name }}{% endblock %}
+
+{% block content %}
+<p>
+    <a href="{% url 'system_detail' system.pk %}">{{ system.name }}</a> >
+    Bodies
+</p>
+
+<h1>Bodies in {{ system.name }}</h1>
+
+<ul>
+    {% for body in bodies %}
+        <li class="{% if body.parent_body %}moon-item{% endif %}">
+            <a href="{{ body.get_absolute_url }}">{{ body.name }}</a>
+
+            {% if body.parent_body %}
+                <span class="moon-info">
+                    (moon of {{ body.parent_body.name }})
+                </span>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

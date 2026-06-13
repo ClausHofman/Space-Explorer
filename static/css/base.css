@@ -192,3 +192,59 @@ button.delete:hover {
     border: 1px solid #ccc;
     border-radius: 6px;
 }
+
+/* Comment box styling */
+.comment-box {
+    border: 1px solid #ddd;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    background: #fafafa;
+}
+
+.comment-actions {
+    margin-top: 8px;
+}
+
+.comment-actions button {
+    margin-right: 6px;
+}
+.comment-box p {
+    white-space: pre-wrap;
+}
+
+.comment-target {
+    margin-top: 6px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* Navbar */
+.system-navbar {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.system-navbar .nav-item {
+    margin-right: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+}
+
+.system-navbar .nav-item:hover {
+    text-decoration: underline;
+}
+
+/* Indent moons */
+.moon-info {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.moon-item {
+    margin-left: 20px;
+}
+

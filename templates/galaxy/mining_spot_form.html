@@ -37,7 +37,7 @@
     {% for m in form.metals %}
         <label class="material-item">
             <input type="checkbox" name="materials" value="{{ m.id }}"
-                   {% if m.id in form.initial.materials %}checked{% endif %}>
+                   {% if m.id in selected_ids %}checked{% endif %}>
             {{ m.name }}
         </label>
     {% endfor %}
@@ -48,7 +48,7 @@
     {% for m in form.minerals %}
         <label class="material-item">
             <input type="checkbox" name="materials" value="{{ m.id }}"
-                   {% if m.id in form.initial.materials %}checked{% endif %}>
+                   {% if m.id in selected_ids %}checked{% endif %}>
             {{ m.name }}
         </label>
     {% endfor %}

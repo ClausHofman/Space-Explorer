@@ -15,6 +15,16 @@
     {% include "galaxy/_action_panel.html" with actions=actions add_items=add_items %}
 </div>
 
+<div class="system-navbar">
+    {% for item in navbar_items %}
+        {% if item.count > 0 %}
+            <a href="{{ item.url }}" class="nav-item">
+                {{ item.label }} ({{ item.count }})
+            </a>
+        {% endif %}
+    {% endfor %}
+</div>
+
 {% if system.notes %}
     <p>{{ system.notes }}</p>
 {% endif %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Mining Spots in {{ system.name }}{% endblock %}
+
+{% block content %}
+<p>
+    <a href="{% url 'system_detail' system.pk %}">{{ system.name }}</a> >
+    Mining Spots
+</p>
+
+<h1>Mining Spots in {{ system.name }}</h1>
+
+<ul>
+    {% for spot in spots %}
+        <li>
+            <a href="{{ spot.get_absolute_url }}">{{ spot.name }}</a>
+            — on {{ spot.body.name }}
+        </li>
+    {% empty %}
+        <li>No mining spots found.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

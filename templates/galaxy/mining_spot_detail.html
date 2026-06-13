@@ -10,13 +10,11 @@
     {{ spot.name }}
 </p>
 
-<h1>{{ spot.name }}</h1>
+<div class="page-header">
+    <h1>{{ spot.name }}</h1>
 
-<p><strong>Body:</strong>
-    <a href="{% url 'body_detail' spot.body.pk %}">
-        {{ spot.body.name }}
-    </a>
-</p>
+    {% include "galaxy/_action_panel.html" with actions=actions add_items=add_items %}
+</div>
 
 {% if spot.notes %}
     <p>{{ spot.notes }}</p>
@@ -30,4 +28,23 @@
     {% endfor %}
 </ul>
 {% endif %}
+
+{% if spot.comments.all %}
+    <h2>Comments</h2>
+    <ul class="comment-list">
+        {% for comment in spot.comments.all %}
+            <li class="comment-box">
+                <p>{{ comment.text }}</p>
+                <small>{{ comment.created_at }}</small>
+
+                <div class="comment-actions">
+                    <a href="{% url 'mining_spot_comment_edit' comment.pk %}"><button>Edit</button></a>
+                    <a href="{% url 'mining_spot_comment_delete' comment.pk %}"><button class="delete">Delete</button></a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endif %}
+
 {% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Mining Spot{% endblock %}
+
+{% block content %}
+<h1>Delete Mining Spot</h1>
+
+<p>Are you sure you want to delete "{{ spot.name }}"?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ cancel_url }}">
+    <div class="form-actions">
+        <a href="{{ cancel_url }}" class="button-link btn-secondary">Cancel</a>
+        <button type="submit" class="btn-danger">Yes, delete</button>
+    </div>
+</form>
+{% endblock %}

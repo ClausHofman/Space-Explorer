@@ -1,6 +1,6 @@
 from django.forms import ModelForm, ModelMultipleChoiceField
 from django.db.models.functions import Lower
-from .models import System, CelestialBody, MiningSpot, Material
+from .models import System, CelestialBody, MiningSpot, Material, BodyComment, MiningSpotComment
 
 class SystemForm(ModelForm):
     class Meta:
@@ -53,3 +53,13 @@ class MiningSpotForm(ModelForm):
         # minerals = Material.objects.filter(category="mineral", is_enabled=True)
 
         fields = ["name", "body", "materials", "notes"]
+
+class BodyCommentForm(ModelForm):
+    class Meta:
+        model = BodyComment
+        fields = ["text"]
+
+class MiningSpotCommentForm(ModelForm):
+    class Meta:
+        model = MiningSpotComment
+        fields = ["text"]
